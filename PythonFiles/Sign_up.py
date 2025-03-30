@@ -1,3 +1,4 @@
+﻿# Please change the file path accordingly
 import mysql.connector
 import re
 from datetime import datetime
@@ -29,7 +30,7 @@ def insert_user(username, email, password, registration_date):
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="riya2004",
+        password="your password",
         database="Health_fitness"
     )
     cursor = conn.cursor()
@@ -55,7 +56,7 @@ def is_valid_password(password):
     return re.match(password_regex, password)
 
 def check_username_exists(username):
-    conn = mysql.connector.connect(user='root',password="riya2004",
+    conn = mysql.connector.connect(user='root',password="your password",
                                    host='localhost',database="health_fitness")
     cursor = conn.cursor()
     cursor.execute("SELECT COUNT(*) FROM user WHERE username = %s", (username.lower(),))

@@ -1,3 +1,4 @@
+﻿# Please change the file path accordingly
 import mysql.connector
 from tkinter import *
 from pathlib import Path
@@ -21,7 +22,7 @@ def connect_to_db():
     return mysql.connector.connect(
         host="localhost",          #
         user="root",               
-        password="riya2004",      
+        password="your password",      
         database="health_fitness"   
     )
 
@@ -70,7 +71,7 @@ def print_logs():
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="riya2004",
+        password="your password",
         database="health_fitness"
     )
     
@@ -158,7 +159,7 @@ def delete_log():
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="riya2004",
+        password="your password",
         database="health_fitness"
     )
     

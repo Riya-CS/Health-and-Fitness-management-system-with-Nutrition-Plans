@@ -1,3 +1,4 @@
+﻿# Please change the file path accordingly
 import mysql.connector
 from datetime import datetime
 from Create_Tables import create_database_and_tables  
@@ -6,7 +7,7 @@ def get_connection():
     return mysql.connector.connect(
         host="localhost",
         user="root",
-        password="riya2004",
+        password="your password",
         database="health_fitness"  
     )
 
@@ -87,7 +88,7 @@ if __name__ == '__main__':
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="riya2004",
+        password="your password",
         database="health_fitness"
     )
     cursor = conn.cursor()

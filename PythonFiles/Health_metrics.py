@@ -1,3 +1,4 @@
+﻿# Please change the file path accordingly
 from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Label
 import mysql.connector
@@ -8,7 +9,7 @@ import subprocess
 conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="riya2004",
+        password="your password",
         database="Health_fitness"
     )
 cursor = conn.cursor()
@@ -36,7 +37,7 @@ def get_health_metrics(week_number, year):
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="riya2004",
+        password="your password",
         database="Health_fitness"
     )
     cursor = conn.cursor()
@@ -76,7 +77,7 @@ def new_func():
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="riya2004",
+        password="your password",
         database="Health_fitness"
     )
     cursor = conn.cursor()
@@ -123,7 +124,7 @@ def display_bmi():
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="riya2004",
+        password="your password",
         database="Health_fitness"
     )
     cursor = conn.cursor()

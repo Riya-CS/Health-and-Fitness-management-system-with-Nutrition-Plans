@@ -1,3 +1,4 @@
+﻿# Please change the file path accordingly
 from pathlib import Path
 from datetime import datetime
 import subprocess
@@ -9,7 +10,7 @@ import mysql.connector
 conn = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="riya2004",
+            password="your password",
             database="health_fitness"
         )
 cursor = conn.cursor()

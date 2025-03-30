@@ -1,3 +1,4 @@
+﻿# Please change the file path accordingly
 import mysql.connector
 import sys
 
@@ -12,7 +13,7 @@ def setup_database_triggers():
         conn = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="riya2004",
+            password="your password",
             database="health_fitness"
         )
         cursor = conn.cursor()

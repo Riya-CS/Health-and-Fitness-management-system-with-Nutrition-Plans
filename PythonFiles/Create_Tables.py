@@ -1,3 +1,4 @@
+﻿# Please change the file path accordingly
 
 import mysql.connector
 
@@ -7,7 +8,7 @@ def create_database_and_tables():
         conn = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="riya2004"
+            password="your password"
         )
         cursor = conn.cursor()
         
@@ -20,7 +21,7 @@ def create_database_and_tables():
         conn = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="riya2004",
+            password="your password",
             database="health_fitness"
         )
         cursor = conn.cursor()
@@ -157,7 +158,7 @@ def create_database_and_tables():
             
             ("Breakfast", "Keto", 350, "Scrambled eggs with spinach and paneer (Indian cottage cheese)",),
             ("Lunch", "Keto", 600, "Cauliflower rice with chicken curry and a side of avocado",),
-            ("Dinner", "Keto", 700, "Paneer tikka (grilled cottage cheese) with a side of sautéed spinach",),
+            ("Dinner", "Keto", 700, "Paneer tikka (grilled cottage cheese) with a side of sautÃ©ed spinach",),
             ("Snacks", "Keto", 150, "Cheese and cucumber slices",),
 
             
@@ -169,7 +170,7 @@ def create_database_and_tables():
             
             ("Breakfast", "Low Carb", 350, "Masala omelette with spinach and mushrooms",),
             ("Lunch", "Low Carb", 600, "Grilled chicken with cauliflower rice and a side of salad",),
-            ("Dinner", "Low Carb", 650, "Paneer tikka with sautéed bell peppers and zucchini",),
+            ("Dinner", "Low Carb", 650, "Paneer tikka with sautÃ©ed bell peppers and zucchini",),
             ("Snacks", "Low Carb", 200, "Cheese and cucumber slices",)
         ]
         

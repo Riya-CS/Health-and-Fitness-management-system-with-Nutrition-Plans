@@ -1,3 +1,4 @@
+﻿# Please change the file path accordingly
 import tkinter as tk
 from tkinter import messagebox
 import tkinter.font as tkFont
@@ -13,7 +14,7 @@ def connect_db():
     return mysql.connector.connect(
         host="localhost",
         user="root",
-        password="riya2004",
+        password="your password",
         database="health_fitness"
     )
 

@@ -1,3 +1,4 @@
+﻿# Please change the file path accordingly
 from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Button, PhotoImage, messagebox
 import mysql.connector
@@ -29,7 +30,7 @@ def toggle_password():
         entry_2.config(show='*')  
 
 def check_username_exists(username):
-    conn = mysql.connector.connect(user='root', password="riya2004",
+    conn = mysql.connector.connect(user='root', password="your password",
                                    host='localhost', database="health_fitness")
     cursor = conn.cursor()
 
@@ -43,7 +44,7 @@ def validate_login():
     password = entry_2.get()
     
     if check_username_exists(username):
-        conn = mysql.connector.connect(user='root', password="riya2004",
+        conn = mysql.connector.connect(user='root', password="your password",
                                        host='localhost', database="health_fitness")
         cursor = conn.cursor()
         cursor.execute("SELECT password FROM user WHERE username = %s", (username.lower(),))
