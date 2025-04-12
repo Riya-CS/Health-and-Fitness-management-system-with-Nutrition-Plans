@@ -78,7 +78,8 @@ Track health parameters:
 ```
 ### 3. Run the Application
 ```sh
- python main.py
+ python Create_Tables.py
+ python Start_page.py
 ```
 
 ---
