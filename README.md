@@ -100,6 +100,12 @@ python Start_page.py     # Launches the main application```
 You only need to run Create_Tables.py once to set up the database schema.
 
 Do not run it again, unless you want to drop existing data.
+---
+##Tutorial
+
+
+https://github.com/user-attachments/assets/6133851f-6da4-45ba-af4e-fee62dd5f66d
+
 
 ---
 
