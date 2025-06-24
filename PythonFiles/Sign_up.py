@@ -1,21 +1,22 @@
-﻿# Please change the file path accordingly
-import mysql.connector
+﻿import mysql.connector
 import re
 from datetime import datetime
 from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Button, PhotoImage, Label
 import pop_ups
 import subprocess
+from db_config import DB_CONFIG
 
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\hicha\OneDrive\Desktop\DBMSSSS\build\assets\frame2")
+ASSETS_PATH = Path(__file__).parent.parent / 'build/assets/frame02'
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
 def open_gui1():
-    subprocess.Popen(['python', r'C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\Start_page.py'])
+    script_path = OUTPUT_PATH / "Start_page.py"
+    subprocess.Popen(['python', str(script_path)])
     window.after(000, window.destroy)
 
 def create_rounded_rectangle(canvas, x1, y1, x2, y2, radius, **kwargs):
@@ -27,12 +28,7 @@ def create_rounded_rectangle(canvas, x1, y1, x2, y2, radius, **kwargs):
     canvas.create_oval(x2 - 2 * radius, y2 - 2 * radius, x2, y2, **kwargs)
 
 def insert_user(username, email, password, registration_date):
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="your password",
-        database="Health_fitness"
-    )
+    conn = mysql.connector.connect(**DB_CONFIG)
     cursor = conn.cursor()
     cursor.execute("""
     INSERT INTO User (username, email, password,registrationdate )
@@ -56,8 +52,7 @@ def is_valid_password(password):
     return re.match(password_regex, password)
 
 def check_username_exists(username):
-    conn = mysql.connector.connect(user='root',password="your password",
-                                   host='localhost',database="health_fitness")
+    conn = mysql.connector.connect(**DB_CONFIG)
     cursor = conn.cursor()
     cursor.execute("SELECT COUNT(*) FROM user WHERE username = %s", (username.lower(),))
     count = cursor.fetchone()[0]
@@ -196,4 +191,4 @@ eye_button_2.place(x=1200, y=565, width=30, height=30)
 
 window.resizable(False, False)
 window.mainloop()
-#perfect
+

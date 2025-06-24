@@ -1,6 +1,6 @@
-﻿# Please change the file path accordingly
-import mysql.connector
+﻿import mysql.connector
 import sys
+from db_config import DB_CONFIG
 
 
 global username
@@ -10,12 +10,7 @@ print("In trigger")
 def setup_database_triggers():
     try:
 
-        conn = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="your password",
-            database="health_fitness"
-        )
+        conn = mysql.connector.connect(**DB_CONFIG)
         cursor = conn.cursor()
 
         cursor.execute('''

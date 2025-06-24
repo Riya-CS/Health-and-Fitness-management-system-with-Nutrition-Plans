@@ -1,18 +1,20 @@
-﻿# Please change the file path accordingly
+﻿
 from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Button, PhotoImage, messagebox
 import mysql.connector
 import pop_ups
 import subprocess
+from db_config import DB_CONFIG
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\hicha\OneDrive\Desktop\DBMSSSS\build\assets\frame1")
+ASSETS_PATH = Path(__file__).parent.parent / "build/assets/frame01"
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
 def open_gui1(username):
-    subprocess.Popen(['python', r'C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\User_dashboard.py', username])
+    script_path = OUTPUT_PATH / "User_dashboard.py"
+    subprocess.Popen(['python', str(script_path), username])
 
 
 def create_rounded_rectangle(canvas, x1, y1, x2, y2, radius, **kwargs):
@@ -30,8 +32,7 @@ def toggle_password():
         entry_2.config(show='*')  
 
 def check_username_exists(username):
-    conn = mysql.connector.connect(user='root', password="your password",
-                                   host='localhost', database="health_fitness")
+    conn = mysql.connector.connect(**DB_CONFIG)
     cursor = conn.cursor()
 
     cursor.execute("SELECT COUNT(*) FROM user WHERE username = %s", (username.lower(),))
@@ -44,8 +45,7 @@ def validate_login():
     password = entry_2.get()
     
     if check_username_exists(username):
-        conn = mysql.connector.connect(user='root', password="your password",
-                                       host='localhost', database="health_fitness")
+        conn = mysql.connector.connect(**DB_CONFIG)
         cursor = conn.cursor()
         cursor.execute("SELECT password FROM user WHERE username = %s", (username.lower(),))
         stored_password = cursor.fetchone()
@@ -121,4 +121,3 @@ Button(
 
 window.resizable(False, False)
 window.mainloop()
-#gotta check

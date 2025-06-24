@@ -1,34 +1,32 @@
-﻿# Please change the file path accordingly
-import mysql.connector
+﻿import mysql.connector
 from tkinter import *
 from pathlib import Path
 from datetime import datetime
 import sys
 import subprocess
+from db_config import DB_CONFIG
 
 global username
 username = sys.argv[1] if len(sys.argv) > 1 else "User"
 
 def open_file_with_delay(filename,username, delay=2000):
-    subprocess.Popen(['python', rf'C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\{filename}',username])
+    script_path = Path(__file__).parent / filename
+    subprocess.Popen(['python', str(script_path), username])
     window.after(delay, window.destroy)
 
 def open_del(filename,username, delay=8000):
-    subprocess.Popen(['python', rf'C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\{filename}',username])
+    script_path = Path(__file__).parent / filename
+    subprocess.Popen(['python', str(script_path), username])
     window.after(delay, window.destroy)
 
 # MySQL database connection
 def connect_to_db():
-    return mysql.connector.connect(
-        host="localhost",          #
-        user="root",               
-        password="your password",      
-        database="health_fitness"   
-    )
+    return mysql.connector.connect(**DB_CONFIG)
 
 
 def open_file_with_delay(filename,username, delay=2000):
-    subprocess.Popen(['python', rf'C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\{filename}',username])
+    script_path = Path(__file__).parent / filename
+    subprocess.Popen(['python', str(script_path), username])
     window.after(delay, window.destroy)
 
 def log_nutrition_data():
@@ -68,13 +66,7 @@ def log_nutrition_data():
         print(f"Error: {err}")
 
 def print_logs():
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="your password",
-        database="health_fitness"
-    )
-    
+    conn = mysql.connector.connect(**DB_CONFIG)
     cursor = conn.cursor()
    
     cursor.execute("""
@@ -156,13 +148,7 @@ def delete_log_input():
     button_delete.config(command=delete_log)  
 
 def delete_log():
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="your password",
-        database="health_fitness"
-    )
-    
+    conn = mysql.connector.connect(**DB_CONFIG)
     cursor = conn.cursor()
     
     log_id = entry_logid.get()  
@@ -194,7 +180,7 @@ def delete_log():
 
 # Tkinter GUI setup
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\build\assets\frame1")
+ASSETS_PATH = Path(__file__).parent.parent / 'build/assets/frame1'
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)

@@ -1,9 +1,10 @@
-﻿# Please change the file path accordingly
+﻿
 import mysql.connector
 import pop_ups
 from pathlib import Path
 import sys
 from tkinter import *
+from db_config import DB_CONFIG
 
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Label
 import mysql.connector
@@ -15,12 +16,7 @@ username = sys.argv[1] if len(sys.argv) > 1 else "User"
 def delete_user_data(username):
     try:
         
-        conn = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="your password",
-            database="health_fitness"
-        )
+        conn = mysql.connector.connect(**DB_CONFIG)
         cursor = conn.cursor()
 
         
@@ -56,7 +52,7 @@ def delete_user_data(username):
 def setup_triggers():
 
 
-    trigger_script_path = r"C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\Triggers.py"
+    trigger_script_path = r"Triggers.py"
     try:
         
         result = subprocess.run(
@@ -79,7 +75,7 @@ def setup_triggers():
 
     try:
         
-        subprocess.run(["python",r"C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\Triggers.py" ,username], capture_output=True, text=True)
+        subprocess.run(["python",r".\Triggers.py" ,username], capture_output=True, text=True)
         
         if result.returncode == 0:
             print("Triggers re-created successfully.")

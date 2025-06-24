@@ -1,29 +1,30 @@
-﻿# Please change the file path accordingly
-import mysql.connector
+﻿import mysql.connector
 from tkinter import *
 from pathlib import Path
 from datetime import datetime
 import sys
 import subprocess
+from db_config import DB_CONFIG
 
 global username
 username = sys.argv[1] if len(sys.argv) > 1 else "User"
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\build\assets\frame5")
+ASSETS_PATH = Path(__file__).parent.parent / 'build/assets/frame5'
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
 def open_file_with_delay(filename,username, delay=2000):
-    subprocess.Popen(['python', rf'C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\{filename}',username])
+    script_path = OUTPUT_PATH / filename
+    subprocess.Popen(['python', str(script_path), username])
     window.after(delay, window.destroy)
     
 def open_del(filename,username, delay=8000):
-    subprocess.Popen(['python', rf'C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\{filename}',username])
+    script_path = OUTPUT_PATH / filename
+    subprocess.Popen(['python', str(script_path), username])
     window.after(delay, window.destroy)
 
 def log_workout_data():
-    print("hello")
     workout_type = entry_1.get()
     duration = entry_2.get()
     calories_burned = entry_3.get()
@@ -52,14 +53,8 @@ def log_workout_data():
         print(f"Error: {err}")
 
 def print_logs():
-    print("hello1")
     try:
-        conn = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="your password",
-            database="health_fitness"
-        )
+        conn = mysql.connector.connect(**DB_CONFIG)
         cursor = conn.cursor()
         query = '''
         SELECT WorkoutID, Username, WorkoutType, Duration, CaloriesBurned, Date
@@ -137,13 +132,7 @@ def delete_log_input():
 
 
 def delete_log():
-    print("hello")
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="your password",
-        database="health_fitness"
-    )
+    conn = mysql.connector.connect(**DB_CONFIG)
     
     cursor = conn.cursor()
     
@@ -176,12 +165,7 @@ def delete_log():
 
 
 def connect_to_db():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="your password",
-        database="health_fitness"
-    )
+    return mysql.connector.connect(**DB_CONFIG)
 
 window = Tk()
 window.geometry("1536x806+0+0")

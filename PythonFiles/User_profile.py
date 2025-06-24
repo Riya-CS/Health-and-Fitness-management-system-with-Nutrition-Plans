@@ -1,22 +1,17 @@
-﻿# Please change the file path accordingly
-import tkinter as tk
+﻿import tkinter as tk
 from tkinter import messagebox
 import tkinter.font as tkFont
 import mysql.connector
 import sys, subprocess
 import pop_ups
+from db_config import DB_CONFIG
 
 global username
 username = sys.argv[1] if len(sys.argv) > 1 else "User"
 
 
 def connect_db():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="your password",
-        database="health_fitness"
-    )
+    return mysql.connector.connect(**DB_CONFIG)
 
 
 def load_user_details():
@@ -123,20 +118,27 @@ def enable_editing():
 
 
 def disable_fields():
+    if not name_entry.winfo_exists():
+        return
     name_entry.config(state="disabled")
-    age_entry.config(state="disabled")
-    phone_entry.config(state="disabled")
-    gender_dropdown.config(state="disabled")
+    if age_entry.winfo_exists():
+        age_entry.config(state="disabled")
+    if phone_entry.winfo_exists():
+        phone_entry.config(state="disabled")
+    if gender_dropdown.winfo_exists():
+        gender_dropdown.config(state="disabled")
     for rb in spec_radiobuttons:
-        rb.config(state="disabled")
+        if rb.winfo_exists():
+            rb.config(state="disabled")
+    if edit_button.winfo_exists():
+        edit_button.config(state="normal")
 
-    edit_button.config(state="normal")  
 
 def on_close():
     try:
         
         print("from here")
-        next_script_path = r"C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\User_dashboard.py"  # Replace with the actual path
+        next_script_path = r".\User_dashboard.py" 
         subprocess.Popen(['python', next_script_path, username])  
     except Exception as e:
         pop_ups.popup_message("Error", f"Failed to open the next script: {e}")
@@ -163,7 +165,7 @@ root.geometry(f"{window_width}x{window_height}+{x}+{y}")
 
 root.configure(bg="#82BBB5")
 
-bg_image = tk.PhotoImage(file=r"C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\build\assets\image_234.png")  # Replace with your image file
+bg_image = tk.PhotoImage(file=r"..\build\assets\frame5\image_8.png")  
 
 
 bg_label = tk.Label(root, image=bg_image)
@@ -238,4 +240,3 @@ disable_fields()
 
 
 root.mainloop()
-#perfect

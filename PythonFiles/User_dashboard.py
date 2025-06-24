@@ -1,32 +1,29 @@
-﻿# Please change the file path accordingly
-from pathlib import Path
+﻿from pathlib import Path
 from datetime import datetime
 import subprocess
 import sys
 from tkinter import Tk, Canvas, Label, Button, PhotoImage
 import mysql.connector
+from db_config import DB_CONFIG
 
 
-conn = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="your password",
-            database="health_fitness"
-        )
+conn = mysql.connector.connect(**DB_CONFIG)
 cursor = conn.cursor()
         
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\build\assets\frame2")
+ASSETS_PATH = Path(__file__).parent.parent / 'build/assets/frame2'
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
 def open_file_with_delay(filename,username, delay=2000):
-    subprocess.Popen(['python', rf'C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\{filename}',username])
+    script_path = OUTPUT_PATH / filename
+    subprocess.Popen(['python', str(script_path), username])
     window.after(delay, window.destroy)
 
 def open_del(filename,username, delay=8000):
-    subprocess.Popen(['python', rf'C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\{filename}',username])
+    script_path = OUTPUT_PATH / filename
+    subprocess.Popen(['python', str(script_path), username])
     window.after(delay, window.destroy)
 
 username = sys.argv[1] if len(sys.argv) > 1 else "User"

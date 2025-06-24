@@ -1,29 +1,24 @@
-﻿# Please change the file path accordingly
-
-import mysql.connector
+﻿import mysql.connector
+from db_config import DB_CONFIG
 
 def create_database_and_tables():
     try:
-        
-        conn = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="your password"
-        )
+        # Temporarily remove database to create it first
+        temp_config = DB_CONFIG.copy()
+        temp_config.pop("database")
+
+        conn = mysql.connector.connect(**temp_config)
         cursor = conn.cursor()
-        
-        
+
         cursor.execute("DROP DATABASE IF EXISTS health_fitness")
         cursor.execute("CREATE DATABASE health_fitness")
-        conn.commit()
+        print("✅ Database created.")
 
-        
-        conn = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="your password",
-            database="health_fitness"
-        )
+        cursor.close()
+        conn.close()
+
+        # Connect again using full DB_CONFIG with database name
+        conn = mysql.connector.connect(**DB_CONFIG)
         cursor = conn.cursor()
 
         
@@ -123,14 +118,14 @@ def create_database_and_tables():
  
         cursor.execute('''
     INSERT INTO Trainer (Name, Specialization, ContactInfo) VALUES
-    ('Pranay Saxena', 'Cardio Fitness Trainer', 'pranay.saxena@gmail.com'),
-    ('Riya Shetty', 'Strength Training Expert', 'riya.shetty@gmail.com'),
-    ('Pranav Rao', 'HIIT Trainer', 'pranav.rao@gmail.com'),
-    ('Pranav Acharya', 'Yoga and Flexibility Trainer', 'pranav.acharya@gmail.com'),
-    ('Rishika Narayan', 'Weight Loss Coach', 'rishika.narayan@gmail.com'),
-    ('Rishita Singh', 'Cardio Fitness Trainer', 'rishita.singh@gmail.com'),
-    ('Rishav Sinha', 'Strength Training Expert', 'rishav.sinha@gmail.com'),
-    ('Prithvi SK', 'HIIT Trainer', 'prithvi.sk@gmail.com')
+    ('Pranay', 'Cardio Fitness Trainer', 'pranay@gmail.com'),
+    ('Riya', 'Strength Training Expert', 'riya.@gmail.com'),
+    ('Pranav', 'HIIT Trainer', 'pranav.@gmail.com'),
+    ('Pranav', 'Yoga and Flexibility Trainer', 'pranavr.@gmail.com'),
+    ('Rishika', 'Weight Loss Coach', 'rishika.@gmail.com'),
+    ('Rishita', 'Cardio Fitness Trainer', 'rishita.@gmail.com'),
+    ('Rishav', 'Strength Training Expert', 'rishav.@gmail.com'),
+    ('Prithvi', 'HIIT Trainer', 'prithvi.@gmail.com')
 ''')
 
         

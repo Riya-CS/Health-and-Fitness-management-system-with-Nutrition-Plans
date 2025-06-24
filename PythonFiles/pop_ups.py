@@ -1,5 +1,4 @@
-﻿# Please change the file path accordingly
-import tkinter as tk
+﻿import tkinter as tk
 from tkinter import Label, Button, Toplevel
 
 def popup_message(message, title="Heyy", bg_color="#E7F2D6", font=("Otomanopee One", 12 ,), width=500, height=150):
@@ -34,5 +33,5 @@ def popup_message(message, title="Heyy", bg_color="#E7F2D6", font=("Otomanopee O
         pass  
 
     popup.mainloop()
-#perfect
+
 

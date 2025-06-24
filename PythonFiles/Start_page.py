@@ -1,11 +1,9 @@
-﻿# Please change the file path accordingly
-
-from pathlib import Path
+﻿from pathlib import Path
 from tkinter import Tk, Canvas, Button, PhotoImage
 import subprocess
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\hicha\OneDrive\Desktop\DBMSSSS\build\assets\frame0\build\assets\frame0")
+ASSETS_PATH = Path(__file__).parent.parent / 'build/assets/frame00'
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
@@ -19,11 +17,13 @@ def create_rounded_rectangle(canvas, x1, y1, x2, y2, radius, **kwargs):
     canvas.create_oval(x2 - 2*radius, y2 - 2*radius, x2, y2, **kwargs)
 
 def open_gui1():
-    subprocess.Popen(['python', r'C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\Log_in.py'])
+    script_path = OUTPUT_PATH / "Log_in.py"
+    subprocess.Popen(['python', str(script_path)])
     window.after(3000, window.destroy)  
 
 def open_gui2():
-    subprocess.Popen(['python', r'C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\Sign_up.py'])  # Adjust the command based on your environment
+    script_path = OUTPUT_PATH / "Sign_up.py"
+    subprocess.Popen(['python', str(script_path)])
     window.after(3000, window.destroy)  
     
 window = Tk()
@@ -73,5 +73,3 @@ button_2.place(x=604.0, y=677.0, width=329.0, height=75.0)
 
 window.resizable(False, False)
 window.mainloop()
-
-#perfect

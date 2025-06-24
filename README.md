@@ -69,18 +69,34 @@ Track health parameters:
 ## 🏁 Installation Guide
 ### 1. Clone the Repository
 ```sh
- git clone https://github.com/yourusername/Health-Fitness-Tracker.git
- cd Health-Fitness-Tracker
+ git clone https://github.com/Riya-CS/Health-and-Fitness-management-system-with-Nutrition-Plans
+ cd Health-and-Fitness-management-system-with-Nutrition-Plans
 ```
 ### 2. Install Dependencies
 ```sh
  pip install -r requirements.txt
 ```
-### 3. Run the Application
-```sh
- python Create_Tables.py
- python Start_page.py
+### 3. Configure Database Credentials
+Before running the application, open the `PythonFiles/db_config.py` file and update the MySQL `user` and `password` fields with your own MySQL username and password. For example:
+```python
+db_config.py
+DB_CONFIG = {
+    "host": "localhost",
+    "user": "your_mysql_username",
+    "password": "your_mysql_password",
+    "database": "health_fitness"
+}
 ```
+You only need to update your credentials in this one file.
+
+### 4. Run the Application
+```cd PythonFiles
+python Create_Tables.py  # Run this ONLY ONCE to create the database and tables
+python Start_page.py     # Launches the main application```
+
+##📝 Note:
+You only need to run Create_Tables.py once to set up the database schema.
+Do not run it again, unless you want to drop existing data.
 
 ---
 

@@ -1,22 +1,17 @@
-﻿# Please change the file path accordingly
-from pathlib import Path
+﻿from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Label
 import mysql.connector
 from datetime import datetime, timedelta
 import sys
 import subprocess
+from db_config import DB_CONFIG
 
-conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="your password",
-        database="Health_fitness"
-    )
+conn = mysql.connector.connect(**DB_CONFIG)
 cursor = conn.cursor()
     
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\build\assets\frame4")
+ASSETS_PATH = Path(__file__).parent.parent / 'build/assets/frame4'
 
 global username
 username = sys.argv[1] if len(sys.argv) > 1 else "User"
@@ -25,21 +20,17 @@ def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
 def open_file_with_delay(filename,username, delay=2000):
-    subprocess.Popen(['python', rf'C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\{filename}',username])
+    script_path = OUTPUT_PATH / filename
+    subprocess.Popen(['python', str(script_path), username])
     window.after(delay, window.destroy)
     
 def open_del(filename,username, delay=8000):
-    subprocess.Popen(['python', rf'C:\Users\hicha\OneDrive\Desktop\DBMSSSS\DBMS_Project_code\{filename}',username])
+    script_path = OUTPUT_PATH / filename
+    subprocess.Popen(['python', str(script_path), username])
     window.after(delay, window.destroy)
 
 def get_health_metrics(week_number, year):
-
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="your password",
-        database="Health_fitness"
-    )
+    conn = mysql.connector.connect(**DB_CONFIG)
     cursor = conn.cursor()
    
     start_date = datetime(year, 1, 1) + timedelta(weeks=week_number-1)
@@ -74,12 +65,7 @@ def display_metrics():
 
 
 def new_func():
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="your password",
-        database="Health_fitness"
-    )
+    conn = mysql.connector.connect(**DB_CONFIG)
     cursor = conn.cursor()
     image_6 = canvas.create_image(908.0, 636.0, image=image_image_6)
     image_6 = canvas.create_image(908.0, 636.0, image=image_image_6)
@@ -121,12 +107,7 @@ def calculate_bmi(weight, height):
     return round(bmi, 2)
 
 def display_bmi():
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="your password",
-        database="Health_fitness"
-    )
+    conn = mysql.connector.connect(**DB_CONFIG)
     cursor = conn.cursor()
     try:
         #print(entry_1.get(),entry_2.get(),entry_3.get(),entry_4.get())
