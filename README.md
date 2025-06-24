@@ -90,7 +90,8 @@ DB_CONFIG = {
 You only need to update your credentials in this one file.
 
 ### 4. Run the Application
-```cd PythonFiles
+```
+cd PythonFiles
 python Create_Tables.py  # Run this ONLY ONCE to create the database and tables
 python Start_page.py     # Launches the main application```
 ```
