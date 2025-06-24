@@ -93,9 +93,11 @@ You only need to update your credentials in this one file.
 ```cd PythonFiles
 python Create_Tables.py  # Run this ONLY ONCE to create the database and tables
 python Start_page.py     # Launches the main application```
+```
+📝 Note:
 
-##📝 Note:
 You only need to run Create_Tables.py once to set up the database schema.
+
 Do not run it again, unless you want to drop existing data.
 
 ---
